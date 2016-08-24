@@ -1,8 +1,8 @@
 var myVideo = document.getElementById('my_video_1');
 var getTime = document.getElementById('getTime');
-var setNote = document.getElementById('setTime');
-var done = document.getElementById('noteFinish');
-var notes = document.getElementById('note');
+var addNote = document.getElementById('addNote');
+var submitNote = document.getElementById('submitNote');
+var notes = document.getElementById('note-content');
 var cues = []
 // getTime.addEventListener('click', () => {
 // 	var currentTime = myVideo.currentTime;
@@ -10,11 +10,12 @@ var cues = []
 // 	console.log(cues)
 // });
 
-setNote.addEventListener('click', ()=>{
+addNote.addEventListener('click', ()=>{
 	myVideo.pause();
 });
 
-done.addEventListener('click', ()=>{
+// Complete note and save
+submitNote.addEventListener('click', ()=>{
 	var currentTime = myVideo.currentTime;
 	var cueNote = notes.value
 	if(notes.value === ""){
