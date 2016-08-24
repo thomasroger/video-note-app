@@ -22,25 +22,30 @@
 		<video id="my_video_1" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" width="640px" height="267px"
 	      controls preload="auto" poster=''
 	      data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-			<source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'  />
+		<source src="http://video.webmfiles.org/big-buck-bunny_trailer.webm" type="video/webm" />
+
 	    </video>
 	</div>
 
+	<canvas id="thecanvas">
+        </canvas>
 	
-	<form ng-show="nCtrl.showForm" novalidate ng-submit="nCtrl.submitNote()">
+	<form ng-show="nCtrl.showForm" novalidate ng-submit="nCtrl.submitNote()" name="noteForm">
 		<!-- <input type="file" accept="video/*"> -->
 		<div>
-			<input required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
+			<input id="note-title" required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
 		</div><!-- End main note view -->
 		<div>
 			<!-- Submit new note to the database -->
 			<textarea required ng-model="nCtrl.newNote.note" name="note" id="note-content" cols="30" rows="10" placeholder="Write your notes"></textarea>
 		</div>
 
-
+	<!-- Submit form button -->
 		<button ng-disabled="nCtrl.$invalid" type="submit">
 			Submit
 		</button>	
+		<!-- Cancel button -->
+		<button ng-click="nCtrl.cancel()">Cancel</button>
 	</form>
 
 		<button 
@@ -50,6 +55,9 @@
 			Add Note
 		</button>	
 </div>
+
+
+					<!-- Test image capture -->
 
 
 

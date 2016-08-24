@@ -13,48 +13,81 @@ angular.module('VideoNoteApp')
 			});
 
 			// $locationProvider.html5Mode(true);
-
 		});
 
 
 
 
-noteController.$inject = ['noteFactory'];
+noteController.$inject = ['noteFactory', '$scope'];
 
-function noteController(noteFactory){
+function noteController(noteFactory, $scope){
 	var nCtrl = this;
 
-
 	nCtrl.myVideo = document.getElementById('my_video_1');
-
+	nCtrl.noteTitle = document.getElementById('note-title');
+	nCtrl.noteContent = document.getElementById('note-content');
 	nCtrl.newNote = {};
 	nCtrl.notes = [];
 
+	// Capture video frame image 
+	nCtrl.saveImg = () => {
+        var thecanvas = document.getElementById('thecanvas');
+		var img = document.getElementById('thumbnail_img');
+ 
+			nCtrl.myVideo.addEventListener('pause', function(){
+                        draw( nCtrl.myVideo, thecanvas, img);
+                    }, false)
+ 
+            function draw( video, thecanvas, img ){
+
+		// get the canvas context for drawing
+		var context = thecanvas.getContext('2d');
+ 
+		// draw the video contents into the canvas x, y, width, height
+                context.drawImage( video, 0, 0, thecanvas.width, thecanvas.height);
+ 
+		// get the image data from the canvas object
+                var dataURL = thecanvas.toDataURL();
+ 
+		// set the source of the img tag
+		// img.setAttribute('src', dataURL); 	
+
+		}
+	};
+
 	nCtrl.addNote = () => {
 		nCtrl.myVideo.pause();
+		nCtrl.saveImg();
 		nCtrl.showForm = true;
 		nCtrl.hideAddBtn = true;
 	}
 
+	// Submit note imformation and store it in nCtrl.notes
 	nCtrl.submitNote = () =>{
 		var currentTime = nCtrl.myVideo.currentTime;
 		var cueTitle = nCtrl.newNote.title
 		var cueNote = nCtrl.newNote.note
-			if(cueNote === "" || cueTitle === ""){
-				nCtrl.myVideo.play()
+			if(nCtrl.noteTitle.value === "" || nCtrl.noteContent.value === ""){
+				return false
 			} else {
 				nCtrl.myVideo.play()
 				nCtrl.newNote = {title: cueTitle, cueTime: currentTime, cueNote: cueNote};
+				nCtrl.noteTitle.value = '';
 			}
-		
+
+		// Hide and show form
 		nCtrl.showForm = false;
 		nCtrl.hideAddBtn = false;
 		noteFactory.postNote(nCtrl.newNote)
 					.then(nCtrl.submitErrorSuccess, nCtrl.submitErrorFail);	
 
 	}
+	// Hide form with cancel button
+	nCtrl.cancel = () =>{
+		nCtrl.showForm = false;
+		nCtrl.hideAddBtn = false;
 
-
+	}
     // update newNote array with res data
 	nCtrl.submitErrorSuccess = function(res) {
 		nCtrl.notes.push(res.data)
@@ -66,6 +99,7 @@ function noteController(noteFactory){
 		console.log('Error submitting file', err)
 	}
 
+	// Get notes from noteFactory route api/notes
 	nCtrl.getNotes = () =>{
 		noteFactory.getNotes(nCtrl.newVideo).then((err, res)=>{
 			if(err){
