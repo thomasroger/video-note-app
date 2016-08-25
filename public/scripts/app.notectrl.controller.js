@@ -27,7 +27,7 @@ function noteController(noteFactory, $scope){
 	nCtrl.notes = [];
 
 	// Capture video frame image 
-	nCtrl.saveImg = () => {
+	nCtrl.saveThumbnail = () => {
         var thecanvas = document.getElementById('thecanvas');
 		var img = document.getElementById('thumbnail_img');
  
@@ -40,6 +40,8 @@ function noteController(noteFactory, $scope){
 		// get the canvas context for drawing
 		var context = thecanvas.getContext('2d');
  
+ 		// 
+
 		// draw the video contents into the canvas x, y, width, height
                 context.drawImage( video, 0, 0, thecanvas.width, thecanvas.height);
 
@@ -58,7 +60,7 @@ function noteController(noteFactory, $scope){
 	// Open form and capture snapshot
 	nCtrl.addNote = () => {
 		nCtrl.myVideo.pause();
-		nCtrl.saveImg();
+		nCtrl.saveThumbnail();
 		nCtrl.showForm = true;
 		nCtrl.hideAddBtn = true;
 	}

@@ -9,13 +9,16 @@ function noteFactory($http){
 		return $http.get('/api/note');
 	} 
 
-	// function postVideo(newVideo){
-	// 	return $http.post('/api/video', newVideo)
-	// }
+	function postNote(newNote){
+		return $http.post('/api/note', newNote)
+	}
+
+	function postVideo(newVideo){
+		return $http.post('/api/video', newVideo)
+	}
 	return {
 		getNotes: getNotes,
-		postNote: (newNote) => {
-			return $http.post('/api/note', newNote)
-		}
+		postNote: postNote,
+		postVideo: postVideo
 	}
 }

@@ -27,11 +27,13 @@
 	    </video>
 	</div>
 
-	<canvas id="thecanvas">
-        </canvas>
+
 	
 	<form ng-show="nCtrl.showForm" novalidate ng-submit="nCtrl.submitNote()" name="noteForm">
 		<!-- <input type="file" accept="video/*"> -->
+		<canvas id="thecanvas">
+        </canvas>
+        
 		<div>
 			<input id="note-title" required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
 		</div><!-- End main note view -->
@@ -63,10 +65,12 @@
 
 	<!-- Scripts -->
 	<script src="//vjs.zencdn.net/5.8/video.min.js"></script>
-	<!-- <script src="scripts/app.js"></script> -->
 	<script src="scripts/app.module.js"></script>
-	<script src="scripts/app.notectrl.controller.js"></script>
 	<script src="scripts/app.notefactory.factory.js"></script>
+	<script src="scripts/app.notectrl.controller.js"></script>
+	<script src="scripts/app.videoctrl.controller.js"></script>
+  	<script src="scripts/vendors/videojs-playlist/dist/videojs-playlist.js"></script>
+<!--   	<script src="scripts/vendors/videojs-playlist-ui/lib/videojs-playlist-ui.js"></script> -->
 
 </body>
 </html>
