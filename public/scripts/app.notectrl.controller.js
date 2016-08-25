@@ -13,10 +13,7 @@ angular.module('VideoNoteApp')
 			});
 
 			// $locationProvider.html5Mode(true);
-		});
-
-
-
+		});   
 
 noteController.$inject = ['noteFactory', '$scope'];
 
@@ -45,8 +42,11 @@ function noteController(noteFactory, $scope){
  
 		// draw the video contents into the canvas x, y, width, height
                 context.drawImage( video, 0, 0, thecanvas.width, thecanvas.height);
- 
+
 		// get the image data from the canvas object
+        
+        // Unable to set url, taints canvas. 
+        // Need to save to server
                 var dataURL = thecanvas.toDataURL();
  
 		// set the source of the img tag
@@ -55,6 +55,7 @@ function noteController(noteFactory, $scope){
 		}
 	};
 
+	// Open form and capture snapshot
 	nCtrl.addNote = () => {
 		nCtrl.myVideo.pause();
 		nCtrl.saveImg();
@@ -67,17 +68,21 @@ function noteController(noteFactory, $scope){
 		var currentTime = nCtrl.myVideo.currentTime;
 		var cueTitle = nCtrl.newNote.title
 		var cueNote = nCtrl.newNote.note
+		// Only submit if title and content not empty
 			if(nCtrl.noteTitle.value === "" || nCtrl.noteContent.value === ""){
 				return false
 			} else {
 				nCtrl.myVideo.play()
 				nCtrl.newNote = {title: cueTitle, cueTime: currentTime, cueNote: cueNote};
+				// Reset title input
 				nCtrl.noteTitle.value = '';
 			}
 
 		// Hide and show form
 		nCtrl.showForm = false;
 		nCtrl.hideAddBtn = false;
+
+		// push note to database
 		noteFactory.postNote(nCtrl.newNote)
 					.then(nCtrl.submitErrorSuccess, nCtrl.submitErrorFail);	
 
