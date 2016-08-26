@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var noteSchema = mongoose.Schema({
 	title: {type: String},
 	description: {type: String},
+	videoUrl: {type: String},
+	vidThumb: {type: String},
 	videoId: {
 		type : mongoose.Schema.ObjectId,
 		ref: 'Video' 

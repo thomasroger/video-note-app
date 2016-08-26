@@ -3,7 +3,11 @@ var videoCtrl = require('./video-api');
 
 module.exports = (app) => {
 	app.get('/', (req,res) => {
-		res.sendFile('home.html', {root: './public/'})
+		res.sendFile('home.html', {root: './public/views'})
+	});
+
+	app.get('/video/list', (req,res)=>{
+		res.sendFile('dashboard.html', {root: './public/views'})
 	});
 
 	// Insert and retrieve notes

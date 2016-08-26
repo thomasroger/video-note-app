@@ -10,15 +10,15 @@ function noteFactory($http){
 	} 
 
 	function postNote(newNote){
-		return $http.post('/api/note', newNote)
+		return $http.post('/api/note', newNote);
 	}
 
 	function postVideo(newVideo){
-		return $http.post('/api/video', newVideo)
+		return $http.post('/api/video', newVideo);
 	}
 	return {
 		getNotes: getNotes,
 		postNote: postNote,
 		postVideo: postVideo
-	}
+	};
 }
