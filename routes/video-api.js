@@ -23,7 +23,6 @@ module.exports = {
 					throw err;
 				} 
 				res.json(video);
-				console.log(video)
 			});
 		}
 	},

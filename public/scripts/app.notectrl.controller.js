@@ -12,6 +12,10 @@ function noteController(noteFactory, $scope){
 	nCtrl.vidThumnail = '';
 	nCtrl.newNote = {};
 
+	// import video list from videoController
+	nCtrl.currentUserVideo = noteFactory.currentUserVideo;
+
+	console.log(nCtrl.currentUserVideo)
 
 	// Get notes from noteFactory route api/notes
 	nCtrl.getNotes = () => {
