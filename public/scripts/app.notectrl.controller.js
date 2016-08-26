@@ -11,7 +11,7 @@ function noteController(noteFactory, $scope){
 	nCtrl.noteContent = document.getElementById('note-content');
 	nCtrl.vidThumnail = '';
 	nCtrl.newNote = {};
-	nCtrl.notes = [];
+
 
 	// Get notes from noteFactory route api/notes
 	nCtrl.getNotes = () => {
@@ -30,7 +30,7 @@ function noteController(noteFactory, $scope){
 	    // update newNote array with res data
 	// Throw error if submit fails
 	nCtrl.submitSuccess = function(res) {
-		nCtrl.notes.push(res.data)
+		console.log(res)
 	}
 
 	nCtrl.submitError = function(err) {

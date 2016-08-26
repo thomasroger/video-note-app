@@ -11,13 +11,20 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
 </head>
-<body ng-controller="noteController as nCtrl">
+<body>
 
 
-	<form ng-submit="nCtrl.addVideo()">
-		<input type="url" placeholder="Add url">
-		<button>Submit</button>
-	</form>
+
+	<div class="video-container" ng-controller="videoController as vCtrl">
+		<form ng-submit="vCtrl.submitVideo()">
+			<input ng-model="vCtrl.newVideo.title" type="text" placeholder="Title">
+			<input ng-model="vCtrl.newVideo.description" type="text" placeholder="Description">
+			<input ng-model="vCtrl.newVideo.videoUrl" type="url" placeholder="Add url">
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+
+
 
 
 
@@ -28,6 +35,7 @@
 	<script src="../scripts/app.module.js"></script>
 	<script src="../scripts/app.notefactory.factory.js"></script>
 	<script src="../scripts/app.notectrl.controller.js"></script>
+	<script src="../scripts/app.videoctrl.controller.js"></script>
   
 
 
