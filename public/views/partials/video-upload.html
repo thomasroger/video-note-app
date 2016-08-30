@@ -1,0 +1,54 @@
+	<div class="video-container" ng-controller="videoController as vCtrl">
+
+		<form ng-submit="vCtrl.submitVideo()">
+			
+
+			<input required ng-model="vCtrl.newVideo.title" type="text" placeholder="Title">
+			
+			<textarea class="ta-styled" required ng-model="vCtrl.newVideo.description" type="text" placeholder="Description"></textarea>
+
+			<input required ng-model="vCtrl.newVideo.videoUrl" type="url" placeholder="Add url">
+			<input type="submit" value="Submit">
+
+		</form>
+
+		<div class="content-alignment">
+		
+			<!-- Video playlist -->
+			<div class="row">
+				
+				<!-- <div class="video-playlist col-md-12" ng-repeat="video in vCtrl.videoList"> -->
+					
+						<!-- Grid -->
+
+						<div ng-repeat="video in vCtrl.videoList" class="video-grid col-md-4 col-sm-6 col-xs-12">
+							<video 
+								class="video-grid-preview"
+								crossOrigin="anonymous" 
+								id="my_video_1"
+								controls
+								ng-src="{{vCtrl.trustSrc(video.videoUrl)}}" 
+								type="video/mp4">
+							</video>
+
+							<a class="note-link" ui-sref="userNoteList({id: video._id})">
+								<h4>{{video.title}}</h4>
+								<h5>{{video.description}}</h5>
+							</a>
+
+							<div class="video-info">
+								<a ui-sref="userNoteList({id: video._id})">
+									<input type="submit"  value="Add Notes">	
+								</a>
+								<input type="submit" ng-click="vCtrl.deleteVideo(video._id)" value="Delete">
+							</div> <!-- End video-info -->
+						</div>	<!-- End Grid -->
+
+
+
+			<!--	</div>--><!-- End Playlist -->
+			</div> <!-- End div row -->
+		</div> <!-- End Alignment -->
+	</div>
+		
+	</div>
