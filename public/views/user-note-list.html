@@ -1,35 +1,39 @@
-	<div class="note-container" ng-controller="noteController as nCtrl">
+<div class="container-fixed">
+	
+	<div ng-controller="noteController as nCtrl" class="note-row row">
 
-		<div class="note">
+		<div ng-controller="videoController as vCtrl" class="col-xs-12 col-md-8 note">
+
 			<!-- Begin main note view -->
-			<div class="main-video">
-				<video 
-					ng-controller="videoController as vCtrl" crossOrigin="anonymous" 
-					id="my_video_2"
-					controls
-			      	ng-src="{{vCtrl.trustSrc(vCtrl.currentVideoUrl)}}">
-			    </video>
-			</div>
+			<video 
+				 crossOrigin="anonymous" 
+				id="my_video_2"
+				controls
+		      	ng-src="{{vCtrl.trustSrc(vCtrl.currentVideoUrl)}}">
+		    </video>
 
-			<div ng-controller="videoController as vCtrl" class="VideoInfo">
+
+			<div class="VideoInfo">
 				<h3>{{vCtrl.currentVideo.title}} - {{vCtrl.currentVideo.description}}</h3>
 				<form ng-show="nCtrl.showForm" ng-submit="nCtrl.submitNote()" name="noteForm">
-				<!-- <input type="file" accept="video/*"> -->
-				<canvas id="thecanvas">
-		        </canvas>
-				<div>
-					<input id="note-title" required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
-				</div><!-- End main note view -->
-				<div>
-					<!-- Submit new note to the database -->
-					<textarea required ng-model="nCtrl.newNote.note" name="note" id="note-content" cols="30" rows="10" placeholder="Write your notes"></textarea>
-				</div>
 
-			<!-- Submit form button -->
-				<input ng-disabled="nCtrl.$invalid" type="submit" value="Submit"/>	
-				<!-- Cancel button -->
-				<input type="button" novalidate ng-click="nCtrl.cancel()" value="Cancel" />
-			</form>
+					<canvas id="thecanvas">
+			        </canvas>
+
+					<div>
+						<input id="note-title" required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
+					</div><!-- End main note view -->
+					
+					<div>
+						<!-- Submit new note to the database -->
+						<textarea required ng-model="nCtrl.newNote.note" name="note" id="note-content" cols="30" rows="10" placeholder="Write your notes"></textarea>
+					</div>
+
+				<!-- Submit form button -->
+					<input ng-disabled="nCtrl.$invalid" type="submit" value="Submit"/>	
+					<!-- Cancel button -->
+					<input type="button" novalidate ng-click="nCtrl.cancel()" value="Cancel" />
+				</form>
 
 				<button 
 					ng-hide="nCtrl.hideAddBtn" 
@@ -37,25 +41,23 @@
 					type="submit">
 					Capture
 				</button>	
-			</div>
-			
-		</div>
+			</div> <!-- End VideoInfo -->
+				
+		</div> <!-- End note column -->
 
-
-
-		<!-- Show Notes -->
-		<div class="noteList" ng-repeat="note in nCtrl.noteList track by $index">
-			<span>
-				<h3>{{note.title}}</h3>
-				<p>Time: {{note.cueTime}}</p>
-			</span>
+				<!-- Show Notes -->
+		<div class="noteList col-xs-6 col-md-4" ng-repeat="note in nCtrl.noteList track by $index">
 
 				<a href="" ng-click="nCtrl.jumpToCueTime($index)">
 					<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue" class=img-thumbnail>
 				</a>
 
+				<h3>{{note.title}}</h3>
+				<p>Time: {{note.cueTime}}</p>
 			<p>{{note.cueNote}}</p>
+
 			<input type="submit" value="Delete" ng-click="nCtrl.deleteNote(note._id)">
 		</div>
-
-	</div>
+		
+	</div>		
+</div>
