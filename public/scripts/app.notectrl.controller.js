@@ -88,7 +88,7 @@ function noteController(noteFactory, $scope, $stateParams){
 
 	// Submit note imformation and store it in nCtrl.notes
 	nCtrl.submitNote = () =>{
-		var currentTime = nCtrl.myVideo.currentTime;
+		var currentTime = Math.round(nCtrl.myVideo.currentTime);
 		var cueTitle = nCtrl.newNote.title
 		var cueNote = nCtrl.newNote.note
 		var vidThumb = nCtrl.vidThumbnail

@@ -1,18 +1,33 @@
 angular.module('VideoNoteApp')
 		.controller('videoController', videoController)
 		.config(($stateProvider, $urlRouterProvider)=>{
-			$urlRouterProvider.otherwise("/");
+			$urlRouterProvider.otherwise("/home");
 
 			$stateProvider
 				.state("userVideoList", {
-					url: '/',
-					templateUrl: '../views/video-upload.html',
+					url: '/home',
+					views: {
+						"": {
+							templateUrl: "../views/partials/video-upload.html"
+						},
+						"nav": {
+							templateUrl: "../views/partials/nav.html"
+						}
+					},
 					controller: 'videoController',
 					controllerAs: 'vCtrl'
 				})
 				.state('userNoteList', {
 					url: '/video/:id',
-					templateUrl: '../views/user-note-list.html',
+					views: {
+						"": {
+							templateUrl: '../views/user-note-list.html',
+						},
+						"nav": {
+								templateUrl: "../views/partials/nav.html"
+						}
+
+					},
 					controller: 'videoController',
 					controllerAs: 'vCtrl'
 				})
@@ -24,21 +39,8 @@ videoController.$inject = ['noteFactory', '$http', '$sce', '$stateParams'];
 function videoController(noteFactory, $http, $sce, $stateParams){
 	var vCtrl = this;
 
-	vCtrl.newVideo = {};
-	
 	// Grab id from stateParams
 	vCtrl.currentVideoId = $stateParams.id
-
-	vCtrl.focus = () =>{
-		if(!vCtrl.newVideo.title){
-			vCtrl.message = "Hello"
-
-		}
-	}
-
-	vCtrl.blur = () =>{
-		vCtrl.message = "Goodbye"
-	}
 
 	vCtrl.getVideos = () =>{
 		noteFactory.getVideos().then((res)=>{

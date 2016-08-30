@@ -1,0 +1,31 @@
+.container-fixed {
+  position: relative;
+  text-align: center; }
+
+.note-row {
+  position: relative;
+  display: inline-block;
+  max-width: 1066px;
+  border: 1px solid blue; }
+
+.note {
+  width: 60%;
+  height: 500px;
+  text-align: left; }
+
+.note-container {
+  position: relative;
+  width: 100%; }
+
+.thumbnail-playlist {
+  position: relative;
+  width: 100%;
+  display: inline-block; }
+
+video {
+  width: 100%; }
+
+.noteList {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 20px; }
