@@ -29,6 +29,17 @@ function videoController(noteFactory, $http, $sce, $stateParams){
 	// Grab id from stateParams
 	vCtrl.currentVideoId = $stateParams.id
 
+	vCtrl.focus = () =>{
+		if(!vCtrl.newVideo.title){
+			vCtrl.message = "Hello"
+
+		}
+	}
+
+	vCtrl.blur = () =>{
+		vCtrl.message = "Goodbye"
+	}
+
 	vCtrl.getVideos = () =>{
 		noteFactory.getVideos().then((res)=>{
 			vCtrl.videoList = res.data;

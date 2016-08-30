@@ -9,6 +9,8 @@
 
 	<div class="video-container" ng-controller="videoController as vCtrl">
 		<form ng-submit="vCtrl.submitVideo()">
+			
+
 			<input required ng-model="vCtrl.newVideo.title" type="text" placeholder="Title">
 			<input required ng-model="vCtrl.newVideo.description" type="text" placeholder="Description">
 			<input required ng-model="vCtrl.newVideo.videoUrl" type="url" placeholder="Add url">
@@ -18,7 +20,9 @@
 
 		<div class="video-playlist">
 			<ul ng-repeat="item in vCtrl.videoList">
-				<li><span><p>{{item.title}}</p></span>
+
+				<li><p>{{item.title}}</p>
+
 					<span><p>{{item.description}}</p></span>
 					<div class="video-preview">	
 						<span>

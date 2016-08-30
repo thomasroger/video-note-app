@@ -123,9 +123,9 @@ function noteController(noteFactory, $scope, $stateParams){
 
 
 	// Delete a single note from video
-	nCtrl.deleteNote = ($index) =>{
-		console.log($index)
-		noteFactory.deleteNote($index).then((nCtrl.deleteNoteError, nCtrl.deleteNoteSuccess ));
+	nCtrl.deleteNote = (note) =>{
+		console.log(note)
+		noteFactory.deleteNote(note).then((nCtrl.deleteNoteError, nCtrl.deleteNoteSuccess ));
 		nCtrl.getNotes(nCtrl.currentVideoId)
 
 	}
