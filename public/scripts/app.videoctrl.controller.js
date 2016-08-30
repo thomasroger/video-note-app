@@ -1,11 +1,11 @@
 angular.module('VideoNoteApp')
 		.controller('videoController', videoController)
 		.config(($stateProvider, $urlRouterProvider)=>{
-			$urlRouterProvider.otherwise("/home");
+			$urlRouterProvider.otherwise("/");
 			
 			$stateProvider
 				.state("userVideoList", {
-					url: '/home',
+					url: '/',
 					views: {
 						"": {
 							templateUrl: "../views/partials/video-upload.html"
