@@ -1,15 +1,17 @@
 var Note = require('../models/note');
 
 module.exports = {
-	getNotes: (req, res)=>{
-		Note.find({}, (err, notes)=>{
-			if(err) {
-				throw err;
-			} else {
-				res.json(notes);
-				console.log(notes)
-			};
-		});
+	getVideoNotes: (req, res)=>{
+		// Find notes whose videoId match request parameter
+		Note.find({'videoId': req.params.id})
+			.populate('videoId')
+				.exec((err, notes)=>{
+					if(err){
+						console.error(err)
+					} else {
+						res.json(notes)
+					}
+				})	
 	},
 
 	upsert: (req,res) =>{
@@ -27,5 +29,26 @@ module.exports = {
                 res.json(note);
             });
         };
+	},
+
+	removeVideoNotes: (req, res) =>{
+		Note.find({'videoId': req.params.id}).remove((err, Note) =>{
+			if(err) {
+				console.error(err)
+			} else {
+				res.json("Successfully deleted note")
+			}
+			
+		})
+	},
+	removeSingleNote: (req, res)=>{
+		Note.findByIdAndRemove({'_id': req.params.id}, (err, Note) =>{
+			if(err) {
+				console.error(err)
+			} else {
+				res.json("Successfully deleted note")
+			}
+			
+		})
 	}
 };

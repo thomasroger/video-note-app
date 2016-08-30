@@ -10,6 +10,15 @@ module.exports = {
 			}
 		});
 	},
+	getCurrentVideo: (req, res) =>{
+		Video.findOne({'_id':req.params.id}, (err, video) =>{
+			if(err){
+				console.error(err)
+			} else {
+				res.json(video)
+			}
+		});	
+	},
 	upsert: (req,res) =>{
 		if(req.params.id){
            // Update existing document
@@ -26,5 +35,14 @@ module.exports = {
 			});
 		}
 	},
-	
+	remove: (req, res) =>{
+		Video.findByIdAndRemove(req.params.id, (err, video) =>{
+			if(err) {
+				console.error(err)
+			} else {
+				res.json("Successfully deleted video")
+			}
+			
+		})
+	}
 };

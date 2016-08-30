@@ -5,12 +5,18 @@ noteFactory.$inject = ["$http"];
 
 function noteFactory($http){
 
-	function getNotes(){
-		return $http.get("/api/note");
+	function getNotes(videoId){
+		var param = videoId ? `/${videoId}` : '';
+		return $http.get(`/api/notes${param}`);
 	}
 
-	function getVideos(){
-		return $http.get("/api/video");
+	function getVideos(videoId){
+		return $http.get('/api/video');
+	}
+
+	function getCurrentVideo(videoId){
+		var param = videoId ? `/${videoId}`: '';
+		return $http.get(`/api/video${param}`);
 	}
 
 	function postNote(newNote){
@@ -20,10 +26,25 @@ function noteFactory($http){
 	function postVideo(newVideo){
 		return $http.post("/api/video", newVideo);
 	}
+
+	function deleteVideo(videoId){
+		console.log(videoId)
+		return $http.delete('/api/video/' + videoId);
+	}
+
+	function deleteNote(noteId){
+		console.log(noteId)
+		return $http.delete('/api/delete-note/' + noteId);
+	}
+		
 	return {
 		getNotes: getNotes,
 		getVideos: getVideos,
+		getCurrentVideo: getCurrentVideo,
+		// getCurrentVideoNotes: getCurrentVideoNotes,
 		postNote: postNote,
-		postVideo: postVideo
+		postVideo: postVideo,
+		deleteVideo: deleteVideo,
+		deleteNote: deleteNote
 	};
 }

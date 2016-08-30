@@ -1,30 +1,35 @@
 angular.module('VideoNoteApp')
 		.controller('noteController', noteController)
 
-noteController.$inject = ['noteFactory', '$scope'];
+noteController.$inject = ['noteFactory', '$scope', '$stateParams'];
 
-function noteController(noteFactory, $scope){
+function noteController(noteFactory, $scope, $stateParams){
 	var nCtrl = this;
 
-	nCtrl.myVideo = document.getElementById('my_video_1');
+
+	nCtrl.myVideo = document.getElementById('my_video_2');
+
+
 	nCtrl.noteTitle = document.getElementById('note-title');
 	nCtrl.noteContent = document.getElementById('note-content');
 	nCtrl.vidThumnail = '';
 	nCtrl.newNote = {};
 
-	// import video list from videoController
-	nCtrl.currentUserVideo = noteFactory.currentUserVideo;
 
-	console.log(nCtrl.currentUserVideo)
+
+	// Grab video parameter to use for database query
+	nCtrl.currentVideoId = $stateParams.id
+
 
 	// Get notes from noteFactory route api/notes
-	nCtrl.getNotes = () => {
-		noteFactory.getNotes().then((res)=>{
+	nCtrl.getNotes = (videoId) => {
+		noteFactory.getNotes(videoId).then((res)=>{
 			nCtrl.noteList = res.data;
+			// console.log(nCtrl.noteList)
 		});
 	}
 
-	nCtrl.getNotes();
+	nCtrl.getNotes(nCtrl.currentVideoId);
 
 	// Post note to note factory
 	nCtrl.postNote = () =>{
@@ -35,6 +40,7 @@ function noteController(noteFactory, $scope){
 	// Throw error if submit fails
 	nCtrl.submitSuccess = function(res) {
 		console.log(res)
+		nCtrl.newNote = {}
 	}
 
 	nCtrl.submitError = function(err) {
@@ -91,7 +97,7 @@ function noteController(noteFactory, $scope){
 				return false
 			} else {
 				nCtrl.myVideo.play()
-				nCtrl.newNote = {title: cueTitle, vidThumb: vidThumb, cueTime: currentTime, cueNote: cueNote};
+				nCtrl.newNote = {title: cueTitle, vidThumb: vidThumb, cueTime: currentTime, cueNote: cueNote, videoId: nCtrl.currentVideoId};
 				// Reset title input
 				nCtrl.noteTitle.value = '';
 			}
@@ -104,14 +110,33 @@ function noteController(noteFactory, $scope){
 		nCtrl.postNote()
 
 		// Grab notes as they are added
-		nCtrl.getNotes()
+		nCtrl.getNotes(nCtrl.currentVideoId)
 
 	}
 	// Hide form with cancel button
 	nCtrl.cancel = () =>{
+		nCtrl.myVideo.play()
 		nCtrl.showForm = false;
 		nCtrl.hideAddBtn = false;
 
+	}
+
+
+	// Delete a single note from video
+	nCtrl.deleteNote = ($index) =>{
+		console.log($index)
+		noteFactory.deleteNote($index).then((nCtrl.deleteNoteError, nCtrl.deleteNoteSuccess ));
+		nCtrl.getNotes(nCtrl.currentVideoId)
+
+	}
+
+	nCtrl.deleteNoteSuccess = () =>{
+		console.log("Successfully deleted note")
+
+	}
+
+	nCtrl.deleteNoteError = (err) =>{
+		console.error("Error deleting notes", err)
 	}
 
 }

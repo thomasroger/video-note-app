@@ -1,0 +1,44 @@
+<style>
+	.video-preview{
+		width: 400px;
+		height: 600px;
+	}
+
+</style>
+
+
+	<div class="video-container" ng-controller="videoController as vCtrl">
+		<form ng-submit="vCtrl.submitVideo()">
+			<input required ng-model="vCtrl.newVideo.title" type="text" placeholder="Title">
+			<input required ng-model="vCtrl.newVideo.description" type="text" placeholder="Description">
+			<input required ng-model="vCtrl.newVideo.videoUrl" type="url" placeholder="Add url">
+			<input type="submit" value="Submit">
+
+		</form>
+
+		<div class="video-playlist">
+			<ul ng-repeat="item in vCtrl.videoList">
+				<li><span><p>{{item.title}}</p></span>
+					<span><p>{{item.description}}</p></span>
+					<div class="video-preview">	
+						<span>
+							<video 
+							crossOrigin="anonymous" 
+							id="my_video_1"
+							controls
+							ng-src="{{vCtrl.trustSrc(item.videoUrl)}}" 
+							type="video/mp4">
+						    </video>
+
+							<div>
+								<a ui-sref="userNoteList({id: item._id})">
+									<input type="submit"  value="Add Notes">	
+								</a>
+							</div>
+								<input type="submit" ng-click="vCtrl.deleteVideo(item._id)" value="Delete">
+						</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>

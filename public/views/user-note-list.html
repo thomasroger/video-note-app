@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html ng-app="VideoNoteApp">
-<head>
-
-
-	<title>Video App</title>
-	<link href="//vjs.zencdn.net/5.8/video-js.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/app.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
-</head>
-<body>
-
 	<div class="note-container" ng-controller="noteController as nCtrl">
-		
+
 		<div class="note">
 			<!-- Begin main note view -->
 			<div class="main-video">
-				<video crossOrigin="anonymous" id="my_video_1" class="video-js responsive vjs-default-skin vjs-fluid vjs-16-9 vjs-big-play-centered" width="640px" height="267px"
-			      controls autoplay poster=''
-			      data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-				<source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-
+				<video 
+					ng-controller="videoController as vCtrl" crossOrigin="anonymous" 
+					id="my_video_2"
+					controls
+			      	ng-src="{{vCtrl.trustSrc(vCtrl.currentVideoUrl)}}">
 			    </video>
 			</div>
 
@@ -39,11 +25,9 @@
 				</div>
 
 			<!-- Submit form button -->
-				<button ng-disabled="nCtrl.$invalid" type="submit">
-					Submit
-				</button>	
+				<input ng-disabled="nCtrl.$invalid" type="submit" value="Submit"/>	
 				<!-- Cancel button -->
-				<button novalidate ng-click="nCtrl.cancel()">Cancel</button>
+				<input type="button" novalidate ng-click="nCtrl.cancel()" value="Cancel" />
 			</form>
 
 				<button 
@@ -55,28 +39,18 @@
 		</div>
 
 		<!-- Show Notes -->
-		<div ng-repeat="item in nCtrl.noteList track by $index">
+		<div ng-repeat="note in nCtrl.noteList track by $index">
 			<span>
-				<h3>{{item.title}}</h3>
-				<p>Time: {{item.cueTime}}</p>
+				<h3>{{note.title}}</h3>
+				<p>Time: {{note.cueTime}}</p>
 			</span>
 
-				<a href="#" ng-click="nCtrl.jumpToCueTime($index)">
-					<img ng-src="{{item.vidThumb}}" alt="Thumbnail image of note cue">
+				<a href="" ng-click="nCtrl.jumpToCueTime($index)">
+					<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue">
 				</a>
 
-			<p>{{item.cueNote}}</p>
+			<p>{{note.cueNote}}</p>
+			<input type="submit" value="Delete" ng-click="nCtrl.deleteNote($index)">
 		</div>
 
 	</div>
-
-	<!-- Scripts -->
-	<script src="//vjs.zencdn.net/5.8/video.min.js"></script>	
-	<script src="scripts/vendors/videojs-playlist/dist/videojs-playlist.js"></script>
-	<script src="scripts/app.module.js"></script>
-	<script src="scripts/app.notefactory.factory.js"></script>
-	<script src="scripts/app.notectrl.controller.js"></script>
-	<script src="scripts/app.videoctrl.controller.js"></script>
-
-</body>
-</html>

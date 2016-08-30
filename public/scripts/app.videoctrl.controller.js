@@ -1,21 +1,52 @@
 angular.module('VideoNoteApp')
-		.controller('videoController', videoController);
+		.controller('videoController', videoController)
+		.config(($stateProvider, $urlRouterProvider)=>{
+			$urlRouterProvider.otherwise("/");
 
-videoController.$inject = ['noteFactory', '$http'];
+			$stateProvider
+				.state("userVideoList", {
+					url: '/',
+					templateUrl: '../views/video-upload.html',
+					controller: 'videoController',
+					controllerAs: 'vCtrl'
+				})
+				.state('userNoteList', {
+					url: '/video/:id',
+					templateUrl: '../views/user-note-list.html',
+					controller: 'videoController',
+					controllerAs: 'vCtrl'
+				})
+		});
+
+videoController.$inject = ['noteFactory', '$http', '$sce', '$stateParams'];
 
 	// Video upload
-function videoController(noteFactory, $http){
+function videoController(noteFactory, $http, $sce, $stateParams){
 	var vCtrl = this;
 
 	vCtrl.newVideo = {};
+	
+	// Grab id from stateParams
+	vCtrl.currentVideoId = $stateParams.id
 
 	vCtrl.getVideos = () =>{
 		noteFactory.getVideos().then((res)=>{
 			vCtrl.videoList = res.data;
+			// console.log(vCtrl.videoList)
 		});
 	}
 
 	vCtrl.getVideos();
+
+	// Pass id to database and retrieve video
+	vCtrl.getCurrentVideo = (videoId) =>{
+		noteFactory.getCurrentVideo(videoId).then((res)=>{
+			vCtrl.currentVideo = res.data;
+			vCtrl.currentVideoUrl = vCtrl.currentVideo.videoUrl
+		});
+	}
+
+	vCtrl.getCurrentVideo(vCtrl.currentVideoId)
 
 	vCtrl.postVideo= () =>{
 		noteFactory.postVideo(vCtrl.newVideo).then(vCtrl.postSuccess, vCtrl.postError);
@@ -31,22 +62,44 @@ function videoController(noteFactory, $http){
 		console.log('Error submitting', err)
 	}
 
-// Adding video and make available to home controller
-
-	vCtrl.addVideoNotes = ($index) =>{
-		return noteFactory.currentUserVideo = vCtrl.videoList[$index];
-		console.log(noteFactory.currentUserVideo)
-	}
-
 
 	vCtrl.submitVideo = () =>{
 		if(vCtrl.newVideo.title === "" || vCtrl.newVideo.description === "" || vCtrl.newVideo.videoUrl === ""){
 			return false
 		} else {
-			// Reset title input
+			// Post video
 			vCtrl.postVideo()
+			// Retrieve videos from database
 			vCtrl.getVideos()
 		}
+	}
+
+	vCtrl.trustSrc = (src) =>{
+		return $sce.trustAsResourceUrl(src);
+	}
+
+	vCtrl.deleteVideo = (videoId) =>{
+		noteFactory.deleteNote(videoId).then((vCtrl.deleteVideoError, vCtrl.deleteVideoSuccess ));
+		noteFactory.deleteVideo(videoId).then((vCtrl.deleteNotesError, vCtrl.deleteNotesSuccess))
+			vCtrl.getVideos()
+	}
+
+	vCtrl.deleteVideoSuccess = (res) =>{
+		console.log("Successfully deleted video")
+	}
+
+
+	vCtrl.deleteVideoError = (err) =>{
+		console.log("Error deleting video", err)
+	}
+
+	vCtrl.deleteNotesSuccess = () =>{
+		console.log("Successfully deleted notes")
+
+	}
+
+	vCtrl.deleteNotesError = (err) =>{
+		console.error("Error deleting notes", err)
 	}
 
 }
