@@ -1,31 +1,53 @@
-.container-fixed {
-  position: relative;
-  text-align: center; }
+.note-video {
+  padding-left: 0; }
 
-.note-row {
-  position: relative;
-  display: inline-block;
-  max-width: 1066px;
-  border: 1px solid blue; }
-
-.note {
-  width: 60%;
-  height: 500px;
-  text-align: left; }
-
-.note-container {
-  position: relative;
+#my_video_2 {
   width: 100%; }
 
-.thumbnail-playlist {
+.videoInfo {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: white; }
+  .videoInfo h3 {
+    margin-top: 0;
+    margin-bottom: 20px; }
+
+.align-notes {
   position: relative;
   width: 100%;
-  display: inline-block; }
+  margin: 0 auto; }
 
-video {
+.note-list {
+  margin-bottom: 20px;
+  padding: 0;
+  padding-top: 10px; }
+  .note-list ul {
+    padding-left: 0;
+    margin: 0 auto; }
+    .note-list ul li {
+      text-decoration: none;
+      list-style: none; }
+
+.capture-form-row {
+  margin-top: 10px; }
+
+.capture-form-container {
+  padding: 0;
+  margin-top: 10px;
+  background-color: white; }
+
+.capture-form {
+  padding: 10px;
+  text-align: center; }
+
+.capture-btn {
   width: 100%; }
 
-.noteList {
-  display: inline-block;
-  position: relative;
-  margin-bottom: 20px; }
+#thecanvas {
+  width: 50%; }
+
+#note-title {
+  width: 50%; }
+
+#note-content {
+  width: 50%; }

@@ -1,63 +1,89 @@
-<div class="container-fixed">
+<div class="container">
 	
-	<div ng-controller="noteController as nCtrl" class="note-row row">
+	<div ng-controller="noteController as nCtrl" class="row note-row">
 
-		<div ng-controller="videoController as vCtrl" class="col-xs-12 col-md-8 note">
+		<div class="col-md-12 align-notes">
 
-			<!-- Begin main note view -->
-			<video 
-				 crossOrigin="anonymous" 
-				id="my_video_2"
-				controls
-		      	ng-src="{{vCtrl.trustSrc(vCtrl.currentVideoUrl)}}">
-		    </video>
-
-
-			<div class="VideoInfo">
-				<h3>{{vCtrl.currentVideo.title}} - {{vCtrl.currentVideo.description}}</h3>
-				<form ng-show="nCtrl.showForm" ng-submit="nCtrl.submitNote()" name="noteForm">
-
-					<canvas id="thecanvas">
-			        </canvas>
-
-					<div>
-						<input id="note-title" required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
-					</div><!-- End main note view -->
-					
-					<div>
-						<!-- Submit new note to the database -->
-						<textarea required ng-model="nCtrl.newNote.note" name="note" id="note-content" cols="30" rows="10" placeholder="Write your notes"></textarea>
-					</div>
-
-				<!-- Submit form button -->
-					<input ng-disabled="nCtrl.$invalid" type="submit" value="Submit"/>	
-					<!-- Cancel button -->
-					<input type="button" novalidate ng-click="nCtrl.cancel()" value="Cancel" />
-				</form>
-
-				<button 
-					ng-hide="nCtrl.hideAddBtn" 
-					ng-click="nCtrl.capture()" 
-					type="submit">
-					Capture
-				</button>	
-			</div> <!-- End VideoInfo -->
+			<div ng-controller="videoController as vCtrl" class="col-xs-12 col-md-8 col-lg-8 note-video">
 				
-		</div> <!-- End note column -->
+				<div class="row video-row">	
+					<video 
+						 crossOrigin="anonymous" 
+						id="my_video_2"
+						controls
+				      	ng-src="{{vCtrl.trustSrc(vCtrl.currentVideoUrl)}}">
+				    </video>
+				</div>
+					<!-- Begin main note view -->
 
-				<!-- Show Notes -->
-		<div class="noteList col-xs-6 col-md-4" ng-repeat="note in nCtrl.noteList track by $index">
+				<div class="row">	
+					<div class="col-md-12 videoInfo">
+						<h3>{{vCtrl.currentVideo.title}} - {{vCtrl.currentVideo.description}}</h3>
+					</div>	<!-- End Video Info Row -->		
+				</div>
 
-				<a href="" ng-click="nCtrl.jumpToCueTime($index)">
-					<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue" class=img-thumbnail>
-				</a>
+				<div class="row capture-form-row">
+					<div class="col-md-12 capture-form-container">
+						
+						<form class="capture-form" ng-show="nCtrl.showForm" ng-submit="nCtrl.submitNote()" name="noteForm">
 
-				<h3>{{note.title}}</h3>
-				<p>Time: {{note.cueTime}}</p>
-			<p>{{note.cueNote}}</p>
+							<canvas id="thecanvas">
+					        </canvas>
 
-			<input type="submit" value="Delete" ng-click="nCtrl.deleteNote(note._id)">
+							<div>
+								<input id="note-title" required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
+							</div><!-- End main note view -->
+							
+							<div>
+								<!-- Submit new note to the database -->
+								<textarea required ng-model="nCtrl.newNote.note" name="note" id="note-content" cols="30" rows="10" placeholder="Write your notes"></textarea>
+							</div>
+
+						<!-- Submit form button -->
+							<input ng-disabled="nCtrl.$invalid" type="submit" value="Submit"/>	
+							<!-- Cancel button -->
+							<input type="button" novalidate ng-click="nCtrl.cancel()" value="Cancel" />
+						</form>
+
+						<button 
+							class="capture-btn"
+							ng-hide="nCtrl.hideAddBtn" 
+							ng-click="nCtrl.capture()" 
+							type="submit">
+							Capture
+						</button>	
+					</div> <!-- Video Note column -->
+			
+				</div> <!-- End row -->
+			</div> <!-- End video-note -->
+			
+
+
+			<div class="noteList col-xs-6 col-md-4 col-lg-4">
+
+				<div class="row" ng-repeat="note in nCtrl.noteList track by $index">
+
+					<div class="col-md-12 note-list">
+					
+					<ul>
+						<li>
+							<a href="" ng-click="nCtrl.jumpToCueTime($index)">
+								<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue" class=img-thumbnail>
+							</a>
+
+							<h3>{{note.title}}</h3>
+							<p>Time: {{note.cueTime}}</p>
+							<p>{{note.cueNote}}</p>
+
+							<input type="submit" value="Delete" ng-click="nCtrl.deleteNote(note._id)">
+						</li>
+					</ul>
+
+					</div> <!-- End column -->
+				</div> <!-- End Row -->
+			</div> <!-- End NoteList -->
+			
 		</div>
-		
-	</div>		
+
+	</div>	<!-- End row -->	
 </div>

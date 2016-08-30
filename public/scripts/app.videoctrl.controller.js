@@ -1,6 +1,6 @@
 angular.module('VideoNoteApp')
 		.controller('videoController', videoController)
-		.config(($locationProvider, $stateProvider, $urlRouterProvider)=>{
+		.config(($stateProvider, $urlRouterProvider)=>{
 			$urlRouterProvider.otherwise("/home");
 			
 			$stateProvider
@@ -31,7 +31,6 @@ angular.module('VideoNoteApp')
 					controller: 'videoController',
 					controllerAs: 'vCtrl'
 				});
-			$locationProvider.html5Mode(true);
 		});
 
 videoController.$inject = ['noteFactory', '$http', '$sce', '$stateParams'];
