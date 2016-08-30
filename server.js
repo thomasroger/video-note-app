@@ -3,7 +3,7 @@ var express = require('express'),
 	logger = require('morgan'),
 	bodyParser = require('body-parser'),
 	mongoose = require('mongoose'),
-	port = process.env.PORT || 3131,
+	port = process.env.PORT || 80,
 	Routes = require('./routes');
 
 mongoose.connect('mongodb://localhost/video-note-app');
