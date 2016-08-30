@@ -54,3 +54,9 @@ textarea.ta-styled {
   margin: 0;
   bottom: 0;
   padding: 0; }
+
+.add-video-btn {
+  width: 100%; }
+
+.delete-video-btn {
+  width: 100%; }

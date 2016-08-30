@@ -1,8 +1,13 @@
+body, html {
+  margin: 0;
+  overflow: hidden;
+  height: 100%; }
+
 body {
   padding-left: 0;
   padding-right: 0;
   margin: 0;
-  background-color: red; }
+  background-color: #ecf0f1; }
 
 body.container-fluid {
   padding: 0; }

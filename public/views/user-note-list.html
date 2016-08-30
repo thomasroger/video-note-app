@@ -40,13 +40,13 @@
 							</div>
 
 						<!-- Submit form button -->
-							<input ng-disabled="nCtrl.$invalid" type="submit" value="Submit"/>	
+							<input class="btn btn-primary" ng-disabled="nCtrl.$invalid" type="submit" value="Submit"/>	
 							<!-- Cancel button -->
-							<input type="button" novalidate ng-click="nCtrl.cancel()" value="Cancel" />
+							<input class="btn btn-danger" type="button" novalidate ng-click="nCtrl.cancel()" value="Cancel" />
 						</form>
 
 						<button 
-							class="capture-btn"
+							class="capture-btn btn btn-primary"
 							ng-hide="nCtrl.hideAddBtn" 
 							ng-click="nCtrl.capture()" 
 							type="submit">
@@ -58,26 +58,59 @@
 			</div> <!-- End video-note -->
 			
 
+			<div class="note-list-container col-xs-6 col-md-4 col-lg-4">
 
-			<div class="noteList col-xs-6 col-md-4 col-lg-4">
-
-				<div class="row" ng-repeat="note in nCtrl.noteList track by $index">
+				<div class="row note-info-row" ng-repeat="note in nCtrl.noteList track by $index">
 
 					<div class="col-md-12 note-list">
 					
 					<ul>
 						<li>
-							<a href="" ng-click="nCtrl.jumpToCueTime($index)">
-								<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue" class=img-thumbnail>
-							</a>
 
-							<h3>{{note.title}}</h3>
-							<p>Time: {{note.cueTime}}</p>
-							<p>{{note.cueNote}}</p>
 
-							<input type="submit" value="Delete" ng-click="nCtrl.deleteNote(note._id)">
+
+						<div class="row">
+							<div class="col-md-8">
+					
+								<div class="row">
+									<div class="col-md-12 thumbnail-align">
+										<!-- Thumbnail row -->
+										<a href="" ng-click="nCtrl.jumpToCueTime($index)">
+											<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue" class=img-thumbnail>
+										</a>
+									</div>	
+								</div>
+								<!-- Delete button row -->
+								<div class="row ">
+									<div class="col-md-12 delete-btn-align">
+										<input class="btn btn-danger" type="submit" value="Delete" ng-click="nCtrl.deleteNote(note._id)">
+									</div>
+								</div>
+
+							</div>
+
+							
+
+							<div class="col-md-4">
+								<h3>{{note.title}}</h3>
+								<p>Time: {{note.cueTime}}</p>
+								<p>{{note.cueNote}}</p>
+								
+							</div>
+
+								
+						</div>
+
+
+	
 						</li>
 					</ul>
+
+
+
+
+
+
 
 					</div> <!-- End column -->
 				</div> <!-- End Row -->

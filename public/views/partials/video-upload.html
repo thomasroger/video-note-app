@@ -36,12 +36,23 @@
 								<h5>{{video.description}}</h5>
 							</a>
 
-							<div class="video-info">
-								<a ui-sref="userNoteList({id: video._id})">
-									<input type="submit"  value="Add Notes">	
-								</a>
-								<input type="submit" ng-click="vCtrl.deleteVideo(video._id)" value="Delete">
-							</div> <!-- End video-info -->
+
+						<div class="row">
+							<div class="col-md-6">
+								
+									<a ui-sref="userNoteList({id: video._id})">
+										<input class="btn btn-primary add-video-btn" type="submit"  value="Add Notes">	
+									</a>
+							</div>
+							<div class="col-md-6">
+								
+								<div class="video-info">
+									<input class="btn btn-danger delete-video-btn" type="submit" ng-click="vCtrl.deleteVideo(video._id)" value="Delete">
+								</div> <!-- End video-info -->
+							</div>
+						</div>
+							
+
 						</div>	<!-- End Grid -->
 
 
