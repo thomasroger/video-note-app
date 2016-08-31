@@ -1,65 +1,101 @@
-	<div class="video-container container-fluid" ng-controller="videoController as vCtrl">
+<div class="video-container container-fluid" ng-controller="videoController as vCtrl">
 
-		<form ng-submit="vCtrl.submitVideo()">
-			
-
-			<input required ng-model="vCtrl.newVideo.title" type="text" placeholder="Title">
-			
-			<textarea class="ta-styled" required ng-model="vCtrl.newVideo.description" type="text" placeholder="Description"></textarea>
-
-			<input required ng-model="vCtrl.newVideo.videoUrl" type="url" placeholder="Add url">
-			<input type="submit" value="Submit">
-
-		</form>
-
-		<div class="content-alignment">
-		
-			<!-- Video playlist -->
-			<div class="row">
-				
-				<!-- <div class="video-playlist col-md-12" ng-repeat="video in vCtrl.videoList"> -->
-					
-						<!-- Grid -->
-
-						<div ng-repeat="video in vCtrl.videoList" class="video-grid col-md-4 col-sm-6 col-xs-12">
-							<video 
-								class="video-grid-preview"
-								crossOrigin="anonymous" 
-								id="my_video_1"
-								controls
-								ng-src="{{vCtrl.trustSrc(video.videoUrl)}}"
-								type="video/mp4">
-							</video>
-
-							<a class="note-link" ui-sref="userNoteList({id: video._id})">
-								<h4>{{video.title}}</h4>
-								<h5>{{video.description}}</h5>
-							</a>
+	<div class="row">
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+		Add Videos!
+		</button>
+	</div>
 
 
-						<div class="row">
-							<div class="col-md-6">
-								
-									<a ui-sref="userNoteList({id: video._id})">
-										<input class="btn btn-primary add-video-btn" type="submit"  value="Add Notes">	
-									</a>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+	  	<div class="modal-dialog" role="document">
+	  	
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		      		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title" id="myModalLabel">Add Video</h4>
+		     	</div> <!-- End modal header -->
+
+
+	     		<div class="modal-body">
+					<!-- Add Video Form -->
+					<div class="row">
+						<form name="video-submit-form" novalidate ng-submit="vCtrl.submitVideo()">
+							<div class="input-group">
+								<input class="form-control" id="title" required ng-model="vCtrl.newVideo.title" type="text" placeholder="Title">
 							</div>
-							<div class="col-md-6">
+							<div class="input-group">
 								
-								<div class="video-info">
-									<input class="btn btn-danger delete-video-btn" type="submit" ng-click="vCtrl.deleteVideo(video._id)" value="Delete">
-								</div> <!-- End video-info -->
+								<input class="form-control" id="description" required ng-model="vCtrl.newVideo.description" type="text" placeholder="Description"></input>
 							</div>
-						</div>
 							
+							<div class="input-group">
+								<input class="form-control" required ng-model="vCtrl.newVideo.videoUrl" type="url" placeholder="Add url">
+							</div>
+								
+						</form>
+					</div>
+	      		</div> <!-- End modal body -->
 
-						</div>	<!-- End Grid -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" novalidate ng-click="vCtrl.submitVideo()" class="btn btn-primary" data-dismiss="modal" >Submit Video</button>
+				</div>
+
+			</div> <!-- End modal content -->
+	    
+	    </div> <!-- End modal dialog -->
+	
+	</div> <!-- End modal -->
 
 
 
-			<!--	</div>--><!-- End Playlist -->
-			</div> <!-- End div row -->
-		</div> <!-- End Alignment -->
-	</div>
+
+
+
+
+			<!-- Video playlist -->
+		<div class="row">		
+			<!-- Grid -->
+			<div ng-repeat="video in vCtrl.videoList" class="video-grid col-md-4 col-lg-4 col-sm-12 col-xs-12">
+
+				<a class="note-link" ui-sref="userNoteList({id: video._id})">
+					<h4>{{video.title}}</h4>
+				</a>
+					
+				<video 
+					class="video-grid-preview"
+					crossOrigin="anonymous" 
+					id="my_video_1"
+					controls
+					ng-src="{{vCtrl.trustSrc(video.videoUrl)}}"
+					type="video/mp4">
+				</video>
+
+				<a class="note-link" ui-sref="userNoteList({id: video._id})">
+					<h5>{{video.description}}</h5>
+				</a>
+
+				<!-- Buttons -->
+				<div class="row">
+					<div class="col-md-6">	
+						<a ui-sref="userNoteList({id: video._id})">
+							<input class="btn btn-primary add-video-btn" type="submit"  value="Add Notes">	
+						</a>
+					</div>
+
+					<div class="col-md-6">
+						<input class="btn btn-danger delete-video-btn" type="submit" ng-click="vCtrl.deleteVideo(video._id)" value="Delete">
+					</div>
+				</div> <!-- End Row Buttons-->
+				
+			</div>
+		</div> <!-- End row -->
+
 		
-	</div>
+</div>

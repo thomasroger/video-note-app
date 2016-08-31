@@ -1,0 +1,15 @@
+body, html {
+  margin: 0;
+  height: 100%; }
+
+body {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+  background-color: #ecf0f1; }
+
+body.container-fluid {
+  padding: 0; }
+
+.login-row {
+  margin-top: 70px; }

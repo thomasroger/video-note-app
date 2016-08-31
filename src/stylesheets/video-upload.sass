@@ -1,13 +1,19 @@
 @import 'base';
 
+#myModal
+	margin-top: 70px;
+
 .video-container
 	margin: 0;
+	margin-top: 70px;
 	padding: 0;
 	border: 0;
 	position: relative;
 	width: 100%;
 	height: 100%;
 	text-align: center;
+	@media only screen and (max-width: 770px)
+		margin-top: 120px;
 	
 .content-alignment
 	display: inline-block;
@@ -35,7 +41,7 @@
 	.video-grid-preview
 		position: relative;
 		display: inline-block;
-		width: 296px;
+		width: 90%;
 	a:hover
 		text-decoration: none;
 	h4
@@ -44,22 +50,21 @@
 	h5
 		position: relative;
 		padding-left: 20px;
-	.video-info
-		display: inline-block;
-		width: 100%;
-		padding-left: 20px;
-		a:hover
-			text-decoration: none;
-
-textarea.ta-styled
-	width: 200px;
-	margin: 0;
-	bottom: 0;
-	padding: 0;
 
 .add-video-btn
 	width: 100%;
+	@media only screen and (max-width: 990px)
+		max-width: 296px;
 
 .delete-video-btn
 	width: 100%;
 	background-color: $red;
+	@media only screen and (max-width: 990px)
+		max-width: 296px;
+
+.navbar-text-align
+	margin-right: 20px;
+
+.input-group
+	width: 100%;
+

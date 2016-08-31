@@ -32,8 +32,13 @@ function noteController(noteFactory, $scope, $stateParams){
 	nCtrl.getNotes(nCtrl.currentVideoId);
 
 	// Post note to note factory
-	nCtrl.postNote = () =>{
-		noteFactory.postNote(nCtrl.newNote).then(nCtrl.submitSuccess, nCtrl.submitError);
+	nCtrl.postNote = (cb) =>{
+		noteFactory.postNote(nCtrl.newNote).then(function(res){
+
+			nCtrl.submitSuccess(res)
+			cb()
+
+		}, nCtrl.submitError);
 	}
 
 	    // update newNote array with res data
@@ -106,9 +111,11 @@ function noteController(noteFactory, $scope, $stateParams){
 	nCtrl.submitNote = ()=>{
 		nCtrl.formatNote()
 		// push note to database
-		nCtrl.postNote()
-		// Grab notes as they are added
-		nCtrl.getNotes(nCtrl.currentVideoId)
+		nCtrl.postNote(function(){
+			// Grab notes as they are added
+			nCtrl.getNotes(nCtrl.currentVideoId)
+		})
+		
 
 		// Hide and show form
 		nCtrl.showForm = false;

@@ -1,6 +1,24 @@
 
-    angular.module('app.auth', [])
+    angular.module('VideoNoteApp')
         .controller('app.auth.controller', Auth)
+        .config(($stateProvider, $urlRouterProvider)=>{
+                $urlRouterProvider.otherwise("/");
+                
+                $stateProvider
+                    .state("landing", {
+                        url: '/',
+                        views: {
+                            "": {
+                                templateUrl: "../views/partials/video-upload.html"
+                            },
+                            "nav": {
+                                templateUrl: "../views/partials/nav.html"
+                            }
+                        },
+                        controller: 'videoController',
+                        controllerAs: 'vCtrl'
+                    })
+                })
 
     Auth.$inject = ['$http'];
 
@@ -10,6 +28,7 @@
         var auth = this,
             alertError = ['alert','alert-danger'];
 
+        auth.loggedIn = "Log Out";
 
 
         auth.payload = { // used both for registering and loggin in
@@ -29,6 +48,7 @@
             },
             success: function(res) { // server response callback
                 location.href = '/dashboard';
+                console.log(res.data)
             },
             error: function(err) {
                 console.error('Login.error', err);
@@ -38,6 +58,20 @@
                 auth.login.message = ( err.data && err.data.message ) || 'Login failed, contact us!';
             }
         };
+
+
+
+        auth.loginSuccess = ()=>{
+            if (!auth.login.success){
+                auth.loggedIn = "Log In";
+            }else{
+                auth.loggedIn = "Log Out";
+            }
+        }
+
+        auth.loginSuccess()
+
+
 
         auth.register = {
             submit: function () {
