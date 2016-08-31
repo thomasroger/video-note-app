@@ -25,7 +25,7 @@ function noteController(noteFactory, $scope, $stateParams){
 	nCtrl.getNotes = (videoId) => {
 		noteFactory.getNotes(videoId).then((res)=>{
 			nCtrl.noteList = res.data;
-			// console.log(nCtrl.noteList)
+			console.log(nCtrl.noteList)
 		});
 	}
 
@@ -87,7 +87,7 @@ function noteController(noteFactory, $scope, $stateParams){
 	}
 
 	// Submit note imformation and store it in nCtrl.notes
-	nCtrl.submitNote = () =>{
+	nCtrl.formatNote = () =>{
 		var currentTime = Math.round(nCtrl.myVideo.currentTime);
 		var cueTitle = nCtrl.newNote.title
 		var cueNote = nCtrl.newNote.note
@@ -101,18 +101,20 @@ function noteController(noteFactory, $scope, $stateParams){
 				// Reset title input
 				nCtrl.noteTitle.value = '';
 			}
+	}
+
+	nCtrl.submitNote = ()=>{
+		nCtrl.formatNote()
+		// push note to database
+		nCtrl.postNote()
+		// Grab notes as they are added
+		nCtrl.getNotes(nCtrl.currentVideoId)
 
 		// Hide and show form
 		nCtrl.showForm = false;
 		nCtrl.hideAddBtn = false;
-
-		// push note to database
-		nCtrl.postNote()
-
-		// Grab notes as they are added
-		nCtrl.getNotes(nCtrl.currentVideoId)
-
 	}
+
 	// Hide form with cancel button
 	nCtrl.cancel = () =>{
 		nCtrl.myVideo.play()
