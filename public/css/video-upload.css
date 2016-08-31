@@ -1,3 +1,16 @@
+body, html {
+  margin: 0;
+  height: 100%; }
+
+body {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+  background-color: #ecf0f1; }
+
+body.container-fluid {
+  padding: 0; }
+
 .video-container {
   margin: 0;
   padding: 0;
@@ -14,9 +27,9 @@
   top: 10px;
   width: 956px;
   background-color: white;
-  -webkit-box-shadow: -2px 4px 5px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: -2px 4px 5px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: -2px 4px 5px 0px rgba(0, 0, 0, 0.5); }
+  -webkit-box-shadow: -2px 4px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: -2px 4px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: -2px 4px 5px 0px rgba(0, 0, 0, 0.2); }
 
 .row {
   width: 100%;
@@ -59,4 +72,5 @@ textarea.ta-styled {
   width: 100%; }
 
 .delete-video-btn {
-  width: 100%; }
+  width: 100%;
+  background-color: #f22613; }

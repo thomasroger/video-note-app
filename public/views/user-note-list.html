@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container-fluid">
 	
 	<div ng-controller="noteController as nCtrl" class="row note-row">
 
-		<div class="col-md-12 align-notes">
+		<div class="col-sm-12 col-md-12 align-notes">
 
-			<div ng-controller="videoController as vCtrl" class="col-xs-12 col-md-8 col-lg-8 note-video">
+			<div ng-controller="videoController as vCtrl" class="col-xs-12 col-sm-12 col-md-7 col-lg-8 note-video">
 				
 				<div class="row video-row">	
 					<video 
@@ -30,8 +30,10 @@
 							<canvas id="thecanvas">
 					        </canvas>
 
-							<div>
+							<div class="row">
+
 								<input id="note-title" required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
+
 							</div><!-- End main note view -->
 							
 							<div>
@@ -58,7 +60,7 @@
 			</div> <!-- End video-note -->
 			
 
-			<div class="note-list-container col-xs-6 col-md-4 col-lg-4">
+			<div class="note-list-container col-sm-12 col-md-4 col-lg-4">
 
 				<div class="row note-info-row" ng-repeat="note in nCtrl.noteList track by $index">
 
@@ -67,36 +69,40 @@
 					<ul>
 						<li>
 
-
-
 						<div class="row">
-							<div class="col-md-8">
+							<div class="col-md-12">
 					
 								<div class="row">
 									<div class="col-md-12 thumbnail-align">
+											<h4>{{note.title}}</h4>
 										<!-- Thumbnail row -->
 										<a href="" ng-click="nCtrl.jumpToCueTime($index)">
-											<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue" class=img-thumbnail>
+											<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue" class="img-thumbnail">
 										</a>
 									</div>	
 								</div>
 								<!-- Delete button row -->
 								<div class="row ">
-									<div class="col-md-12 delete-btn-align">
-										<input class="btn btn-danger" type="submit" value="Delete" ng-click="nCtrl.deleteNote(note._id)">
+									<div class="col-md-12 col-lg-12 note-info-container">
+
+										<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 cue-time-align">
+											<h4>Time: {{note.cueTime}}</h4>
+										</div>
+
+
+										<div class="col-md-4 col-lg-4 delete-btn-align">
+											<input class="btn btn-danger delete-btn" type="submit" value="Delete" ng-click="nCtrl.deleteNote(note._id)">
+										</div>
+
 									</div>
-								</div>
+										<div class="col-md-12 col-lg-12 cue-note">
+											<p>{{note.cueNote}}</p>
+										</div>
+								</div> <!-- End row -->
 
 							</div>
 
 							
-
-							<div class="col-md-4">
-								<h3>{{note.title}}</h3>
-								<p>Time: {{note.cueTime}}</p>
-								<p>{{note.cueNote}}</p>
-								
-							</div>
 
 								
 						</div>
