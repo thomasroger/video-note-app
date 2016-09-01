@@ -6,20 +6,15 @@ noteController.$inject = ['noteFactory', '$scope', '$stateParams'];
 function noteController(noteFactory, $scope, $stateParams){
 	var nCtrl = this;
 
-
 	nCtrl.myVideo = document.getElementById('my_video_2');
-
 
 	nCtrl.noteTitle = document.getElementById('note-title');
 	nCtrl.noteContent = document.getElementById('note-content');
 	nCtrl.vidThumnail = '';
 	nCtrl.newNote = {};
 
-
-
 	// Grab video parameter to use for database query
 	nCtrl.currentVideoId = $stateParams.id
-
 
 	// Get notes from noteFactory route api/notes
 	nCtrl.getNotes = (videoId) => {
@@ -82,13 +77,12 @@ function noteController(noteFactory, $scope, $stateParams){
 	nCtrl.capture = () => {
 		nCtrl.myVideo.pause();
 		nCtrl.saveThumbnail();
-		nCtrl.showForm = true;
-		nCtrl.hideAddBtn = true;
-
 	}
 
 	nCtrl.jumpToCueTime = ($index) =>{
 		nCtrl.myVideo.currentTime = nCtrl.noteList[$index].cueTime;
+		nCtrl.myVideo.pause()
+	
 	}
 
 	// Submit note imformation and store it in nCtrl.notes
@@ -116,27 +110,18 @@ function noteController(noteFactory, $scope, $stateParams){
 			nCtrl.getNotes(nCtrl.currentVideoId)
 		})
 		
-
-		// Hide and show form
-		nCtrl.showForm = false;
-		nCtrl.hideAddBtn = false;
 	}
 
 	// Hide form with cancel button
 	nCtrl.cancel = () =>{
 		nCtrl.myVideo.play()
-		nCtrl.showForm = false;
-		nCtrl.hideAddBtn = false;
-
 	}
-
 
 	// Delete a single note from video
 	nCtrl.deleteNote = (note) =>{
 		console.log(note)
 		noteFactory.deleteNote(note).then((nCtrl.deleteNoteError, nCtrl.deleteNoteSuccess ));
 		nCtrl.getNotes(nCtrl.currentVideoId)
-
 	}
 
 	nCtrl.deleteNoteSuccess = () =>{
@@ -147,5 +132,4 @@ function noteController(noteFactory, $scope, $stateParams){
 	nCtrl.deleteNoteError = (err) =>{
 		console.error("Error deleting notes", err)
 	}
-
 }

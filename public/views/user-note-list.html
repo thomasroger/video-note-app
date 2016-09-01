@@ -1,9 +1,7 @@
 <div class="container-fluid">
 	
 	<div ng-controller="noteController as nCtrl" class="row note-row">
-
 		<div class="col-sm-12 col-md-12 align-notes">
-
 			<div ng-controller="videoController as vCtrl" class="col-xs-12 col-sm-12 col-md-7 col-lg-8 note-video">
 				
 				<div class="row video-row">	
@@ -22,43 +20,77 @@
 					</div>	<!-- End Video Info Row -->		
 				</div>
 
-				<div class="row capture-form-row">
-					<div class="col-md-12 capture-form-container">
-						
-						<form class="capture-form" ng-show="nCtrl.showForm" ng-submit="nCtrl.submitNote()" name="noteForm">
+				<div class="row">
+					<!-- Button trigger modal -->
+					<button 
+						data-toggle="modal" 
+						data-target="#myModal"
+						class="capture-btn btn btn-primary" 
+						ng-click="nCtrl.capture()" 
+						type="submit">
+						Capture
+					</button>	
+				</div>
 
-							<canvas id="thecanvas">
-					        </canvas>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
-							<div class="row">
+		  	<div class="modal-dialog" role="document">
+		  	
+		    	<div class="modal-content">
+			      	<div class="modal-header">
+			      		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        	<h4 class="modal-title" id="myModalLabel">Add Notes</h4>
+			     	</div> <!-- End modal header -->
+		     		<div class="modal-body">
+						<!-- Add Video Form -->
+						<div class="row">
+							<!-- Form -->
+							<div class="row capture-form-row">
+								<div class="col-md-12 capture-form-container">
+									
+									<form class="capture-form" ng-show="nCtrl.showForm"  name="noteForm">
 
-								<input id="note-title" required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
+										<canvas id="thecanvas">
+								        </canvas>
 
-							</div><!-- End main note view -->
-							
-							<div>
-								<!-- Submit new note to the database -->
-								<textarea required ng-model="nCtrl.newNote.note" name="note" id="note-content" cols="30" rows="10" placeholder="Write your notes"></textarea>
-							</div>
+										<div class="row">
 
-						<!-- Submit form button -->
-							<input class="btn btn-primary" ng-disabled="nCtrl.$invalid" type="submit" value="Submit"/>	
-							<!-- Cancel button -->
-							<input class="btn btn-danger" type="button" novalidate ng-click="nCtrl.cancel()" value="Cancel" />
-						</form>
+											<input id="note-title" required ng-model="nCtrl.newNote.title" type="text" name="title" placeholder="Add Title">
 
-						<button 
-							class="capture-btn btn btn-primary"
-							ng-hide="nCtrl.hideAddBtn" 
-							ng-click="nCtrl.capture()" 
-							type="submit">
-							Capture
-						</button>	
-					</div> <!-- Video Note column -->
-			
-				</div> <!-- End row -->
-			</div> <!-- End video-note -->
-			
+										</div><!-- End main note view -->				
+										<div>
+											<!-- Submit new note to the database -->
+											<textarea required ng-model="nCtrl.newNote.note" name="note" id="note-content" cols="30" rows="10" placeholder="Write your notes"></textarea>
+										</div>
+									</form>
+								</div> <!-- End Capture Form Container -->
+							</div> <!-- End Capture Form Row -->
+						</div> <!-- End Row -->
+					</div> <!-- End Modal Body -->
+		      	</div> <!-- End Modal cotnent -->
+
+				<div class="modal-footer">
+					<button 
+						type="button" 
+						class="btn btn-danger" 
+						data-dismiss="modal" 
+						ng-click="nCtrl.cancel()" 
+						novalidate>Cancel
+					</button>
+					<!-- Submit form button -->
+					<button 
+						type="submit" 
+						novalidate 
+						ng-click="nCtrl.submitNote()" 
+						ng-disabled="nCtrl.$invalid" 
+						class="btn btn-primary" 
+						data-dismiss="modal" >Submit
+					</button>
+				</div>
+			</div> <!-- End Modal Dialog -->
+		</div> <!-- End modal -->
+
 
 			<div class="note-list-container col-sm-12 col-md-4 col-lg-4">
 					<div class="row note-list-title">
@@ -66,65 +98,42 @@
 					</div>
 
 				<div class="row note-info-row" ng-repeat="note in nCtrl.noteList track by $index">
-					<div class="col-md-12 note-list">
-					
-					<ul>
-						<li>
-
-						<div class="row">
-							<div class="col-md-12">
-					
+					<div class="col-md-12 note-list">	
+						<ul>
+							<li>
 								<div class="row">
-									<div class="col-md-12 thumbnail-align">
-											<h4>{{note.title}}</h4>
-										<!-- Thumbnail row -->
-										<a href="" ng-click="nCtrl.jumpToCueTime($index)">
-											<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue" class="img-thumbnail">
-										</a>
-									</div>	
-								</div>
-								<!-- Delete button row -->
-								<div class="row ">
-									<div class="col-md-12 col-lg-12 note-info-container">
-
-										<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 cue-time-align">
-											<h4>Time: {{note.cueTime}}</h4>
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-md-12 thumbnail-align">
+												<h4>{{note.title}}</h4>
+												<!-- Thumbnail row -->
+												<a href="" ng-click="nCtrl.jumpToCueTime($index)">
+													<img ng-src="{{note.vidThumb}}" alt="Thumbnail image of note cue" class="img-thumbnail">
+												</a>
+											</div>	
 										</div>
+										<!-- Delete button row -->
+										<div class="row ">
+											<div class="col-md-12 col-lg-12 note-info-container">
+												<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 cue-time-align">
+													<h4>Time: {{note.cueTime}}</h4>
+												</div>
 
-
-										<div class="col-md-4 col-lg-4 delete-btn-align">
-											<input class="btn btn-danger delete-btn" type="submit" value="Delete" ng-click="nCtrl.deleteNote(note._id)">
-										</div>
-
+												<div class="col-md-4 col-lg-4 delete-btn-align">
+													<input class="btn btn-danger delete-btn" type="submit" value="Delete" ng-click="nCtrl.deleteNote(note._id)">
+												</div>
+											</div>
+												<div class="col-md-12 col-lg-12 cue-note">
+													<p>{{note.cueNote}}</p>
+												</div>
+										</div> <!-- End row -->
 									</div>
-										<div class="col-md-12 col-lg-12 cue-note">
-											<p>{{note.cueNote}}</p>
-										</div>
-								</div> <!-- End row -->
-
-							</div>
-
-							
-
-								
-						</div>
-
-
-	
-						</li>
-					</ul>
-
-
-
-
-
-
-
+								</div> <!-- End Row -->
+							</li>
+						</ul>
 					</div> <!-- End column -->
 				</div> <!-- End Row -->
 			</div> <!-- End NoteList -->
-			
 		</div>
-
 	</div>	<!-- End row -->	
 </div>
