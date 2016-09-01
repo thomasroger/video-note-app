@@ -1,0 +1,18 @@
+body, html {
+  margin: 0;
+  height: 100%; }
+
+body {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+  background-color: #ecf0f1; }
+
+body.container-fluid {
+  padding: 0; }
+
+.login-form-container {
+  margin-top: 70px; }
+  @media only screen and (max-width: 770px) {
+    .login-form-container {
+      margin-top: 120px; } }

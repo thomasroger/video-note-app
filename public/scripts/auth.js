@@ -59,10 +59,8 @@
             }
         };
 
-
-
         auth.loginSuccess = ()=>{
-            if (!auth.login.success){
+            if (auth.login.success){
                 auth.loggedIn = "Log In";
             }else{
                 auth.loggedIn = "Log Out";

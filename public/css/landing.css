@@ -1,15 +1,40 @@
-body, html {
-  margin: 0;
-  height: 100%; }
+.navbar {
+  border-radius: 0; }
 
-body {
-  padding-left: 0;
-  padding-right: 0;
-  margin: 0;
-  background-color: #ecf0f1; }
-
-body.container-fluid {
+.container-fluid {
   padding: 0; }
 
-.login-row {
-  margin-top: 70px; }
+.homepage-hero-module {
+  border-right: none;
+  border-left: none;
+  position: relative; }
+
+.no-video .video-container-cover video,
+.touch .video-container-cover video {
+  display: none; }
+
+.no-video .video-container-cover .poster,
+.touch .video-container-cover .poster {
+  display: block !important; }
+
+.video-container-cover {
+  position: relative;
+  bottom: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #000; }
+
+.video-container-cover .poster img {
+  width: 100%;
+  bottom: 0;
+  position: absolute; }
+
+.video-container-cover video {
+  position: absolute;
+  z-index: 0;
+  bottom: 0; }
+
+.video-container-cover video.fillWidth {
+  width: 100%; }
