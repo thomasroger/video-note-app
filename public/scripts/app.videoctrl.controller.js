@@ -61,8 +61,11 @@ function videoController(noteFactory, $http, $sce, $stateParams){
 
 	vCtrl.getCurrentVideo(vCtrl.currentVideoId)
 
-	vCtrl.postVideo= () =>{
-		noteFactory.postVideo(vCtrl.newVideo).then(vCtrl.postSuccess, vCtrl.postError);
+	vCtrl.postVideo= (cb) =>{
+		noteFactory.postVideo(vCtrl.newVideo).then((res)=>{
+			vCtrl.postSuccess(res)	
+			cb()
+		}, vCtrl.postError);
 	}
 
 	// update newNote array with res data
@@ -81,9 +84,10 @@ function videoController(noteFactory, $http, $sce, $stateParams){
 			return false
 		} else {
 			// Post video
-			vCtrl.postVideo()
-			// Retrieve videos from database
-			vCtrl.getVideos()
+			vCtrl.postVideo(()=>{
+				// Retrieve videos from database
+				vCtrl.getVideos()
+			})
 		}
 	}
 
