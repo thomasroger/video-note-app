@@ -1,24 +1,6 @@
 
     angular.module('VideoNoteApp')
         .controller('app.auth.controller', Auth)
-        .config(($stateProvider, $urlRouterProvider)=>{
-                $urlRouterProvider.otherwise("/");
-                
-                $stateProvider
-                    .state("landing", {
-                        url: '/',
-                        views: {
-                            "": {
-                                templateUrl: "../views/partials/video-upload.html"
-                            },
-                            "nav": {
-                                templateUrl: "../views/partials/nav.html"
-                            }
-                        },
-                        controller: 'videoController',
-                        controllerAs: 'vCtrl'
-                    })
-                })
 
     Auth.$inject = ['$http'];
 

@@ -42,7 +42,7 @@
         </nav>
             
 
-
+        <!-- Login and Register Form -->
         <div class="container-fluid login-form-container">
 
             <div class="row">
@@ -57,32 +57,76 @@
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="auth.payload.password">
                         </div>
-                        <button type="submit" class="btn btn-default">Login</button>
+                        <div class="row">
+                            <!-- Button trigger modal -->
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <button type="submit" class="btn btn-default">Login</button>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">
+                                Register
+                                </button>
+                            </div>    
+                        </div>
                         <p ng-class="auth.login.alert">{{ auth.login.message }}</p>
                     </form>
                 </div>
             </div>
             
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
-                    <!-- Register -->
-                    <form ng-submit="auth.register.submit($event)">
-                        <h1>Register!</h1>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input class="form-control" id="exampleInputEmail2" required placeholder="Email" type="email" ng-model="auth.payload.email">
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <div class="modal-dialog" role="document">
+        
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Register</h4>
+                </div> <!-- End modal header -->
+
+
+
+
+                    <div class="modal-body">
+                        <!-- Add Video Form -->
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+                                <!-- Register -->
+                                <form ng-submit="auth.register.submit($event)">
+                                    <h1>Register!</h1>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input class="form-control" id="exampleInputEmail2" required placeholder="Email" type="email" ng-model="auth.payload.email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="auth.payload.password">
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Register</button>
+                                    <p ng-class="auth.register.alert">{{ auth.register.message }}</p>
+                                </form>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="auth.payload.password">
-                        </div>
-                        <button type="submit" class="btn btn-default">Register</button>
-                        <p ng-class="auth.register.alert">{{ auth.register.message }}</p>
-                    </form>
-                </div>
-            </div>
-        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div> <!-- End modal body -->
+
+
+            </div> <!-- End modal content -->
+        
+        </div> <!-- End modal dialog -->
+    
+    </div> <!-- End modal -->
+
+
+
+
         
     
         

@@ -7,9 +7,6 @@
 		</button>
 	</div>
 
-
-
-
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
@@ -60,41 +57,44 @@
 
 
 			<!-- Video playlist -->
-		<div class="row">		
+		<div class="row">	
 			<!-- Grid -->
-			<div ng-repeat="video in vCtrl.videoList" class="video-grid col-md-4 col-lg-4 col-sm-12 col-xs-12">
+			<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">			
+				<div ng-repeat="video in vCtrl.videoList" class="video-grid col-md-4 col-lg-4 col-sm-12 col-xs-12">
 
-				<a class="note-link" ui-sref="userNoteList({id: video._id})">
-					<h4>{{video.title}}</h4>
-				</a>
+					<a class="note-link" ui-sref="userNoteList({id: video._id})">
+						<h4>{{video.title}}</h4>
+					</a>
+						
+					<video 
+						class="video-grid-preview"
+						crossOrigin="anonymous" 
+						id="my_video_1"
+						controls
+						ng-src="{{vCtrl.trustSrc(video.videoUrl)}}"
+						type="video/mp4">
+					</video>
+
+					<a class="note-link" ui-sref="userNoteList({id: video._id})">
+						<h5>{{video.description}}</h5>
+					</a>
+
+					<!-- Buttons -->
+					<div class="row">
+						<div class="col-md-6">	
+							<a ui-sref="userNoteList({id: video._id})">
+								<input class="btn btn-primary add-video-btn" type="submit"  value="Add Notes">	
+							</a>
+						</div>
+
+						<div class="col-md-6">
+							<input class="btn btn-danger delete-video-btn" type="submit" ng-click="vCtrl.deleteVideo(video._id)" value="Delete">
+						</div>
+					</div> <!-- End Row Buttons-->
 					
-				<video 
-					class="video-grid-preview"
-					crossOrigin="anonymous" 
-					id="my_video_1"
-					controls
-					ng-src="{{vCtrl.trustSrc(video.videoUrl)}}"
-					type="video/mp4">
-				</video>
-
-				<a class="note-link" ui-sref="userNoteList({id: video._id})">
-					<h5>{{video.description}}</h5>
-				</a>
-
-				<!-- Buttons -->
-				<div class="row">
-					<div class="col-md-6">	
-						<a ui-sref="userNoteList({id: video._id})">
-							<input class="btn btn-primary add-video-btn" type="submit"  value="Add Notes">	
-						</a>
-					</div>
-
-					<div class="col-md-6">
-						<input class="btn btn-danger delete-video-btn" type="submit" ng-click="vCtrl.deleteVideo(video._id)" value="Delete">
-					</div>
-				</div> <!-- End Row Buttons-->
-				
+				</div>
 			</div>
+
 		</div> <!-- End row -->
 
 		
