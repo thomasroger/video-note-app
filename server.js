@@ -9,6 +9,11 @@ var express = require('express'),
 
 mongoose.connect('mongodb://localhost/video-note-app');
 app.use(express.static(__dirname + '/public'));
+app.use((req, res, next) =>{
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(logger('dev'));
